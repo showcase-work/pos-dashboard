@@ -230,7 +230,7 @@ function DashboardviewComponent($scope, $http, Auth, Orders, GraphPiechartData,d
         }
 
         function updateValues(data){
-
+            self.loaded = true;
             self.orders = data;
             Orders.orders = data; /*set orders service to current data so that when you change tabs it is not fetched again*/
             /*setting all required scope parameters*/
