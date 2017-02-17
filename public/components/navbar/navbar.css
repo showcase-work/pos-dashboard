@@ -1,0 +1,9 @@
+.navbar{
+	background-color: #24323f;
+	color: white;
+	border: none;
+}
+
+.navbar p, .navbar a{
+	color: white !important;
+}

@@ -1,0 +1,84 @@
+/*.nv-x.nv-axis > g .tick {
+	transform: translateY(-100) !important;
+}*/
+.deliveryGraph {
+	background-color: white;
+	margin : 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	height: auto;
+	overflow: hidden;
+	margin-bottom: 10px;
+	border : solid #ebebeb 1px;
+	border-top: 0px;
+}
+
+.deliveryGraph .headingBar {
+	margin : 0px;
+	/*background-color: #65c6bb;*/	
+	font-size : 14px;
+	padding: 8px;
+	height: auto;
+}
+
+.deliveryGraph .headingBar h3 {
+	margin : 0px;
+	vertical-align: middle;
+	padding: 5px;
+	color : white;
+	display : inline-block;
+}
+
+
+.deliveryGraph .customButton {
+	display: inline-block;
+    padding:8px;
+    /*border: 1px solid #ccc;*/
+    margin-left: 10px;
+    background-color: white;
+    outline: none;
+    float : right;
+    vertical-align: middle;
+}
+
+.deliveryGraph .flat {
+	border-radius: 0px;
+}
+
+.deliveryGraph .blue {
+	background-color: #65c6bb;
+}
+
+.deliveryGraph .orange {
+	background-color: #FAAF64;
+}
+.deliveryGraph .pink {
+	background-color :#eb3766;
+}
+
+.deliveryGraph .green {
+	background-color: #40c381;
+}
+
+.deliveryGraph .errorMessage {
+	vertical-align: middle;
+	font-size : 20px;
+	text-align: center;
+}
+
+.deliveryGraph .graph-loader {
+	height: 353px;
+	vertical-align: middle;
+}
+
+
+.deliveryGraph .dashed {
+    stroke-dasharray: 5,5;
+}
+
+.deliveryGraph .nvd3.nv-scatter .nv-groups .nv-point.hover,
+.deliveryOrder .nvd3 .nv-groups .nv-point.hover {
+    stroke-width: 20px !important;
+    fill-opacity: .5 !important;
+    stroke-opacity: .5 !important;
+}

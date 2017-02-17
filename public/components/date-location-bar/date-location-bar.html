@@ -1,0 +1,58 @@
+<div class = "date-location-container">
+
+	<div class = "dates">
+	<i class = "fa fa-calendar"></i>
+	<input class="date-container form-control" type="daterange" ranges='dateLocationBarController.dateRange' ng-model="myDateRange" ng-change="dateLocationBarController.changeDate(myDateRange)" format="MMMM D, YYYY" required readonly/>
+
+	<button class = "btn refresh-btn" ng-click="dateLocationBarController.refresh()"><i class = "fa fa-refresh"></i></button>
+	</div>
+	<div class = "locations">
+		<ul>
+			<button ng-click="dateLocationBarController.applyChanges('All')" ng-disabled = "dateLocationBarController.disabled" ng-class="dateLocationBarController.selectedLocations[0] === 'All' ? 'active' : ''">
+			All
+			</button>
+
+			<span uib-dropdown on-toggle="dateLocationBarController.handleLocationFilterBoxClose(open)" auto-close="outsideClick" is-open="status.isopen">
+			      <button  uib-dropdown-toggle ng-disabled = "dateLocationBarController.disabled || dateLocationBarController.locationsLoading" ng-class="dateLocationBarController.selectedLocations[0] != 'All' ? 'active' : ''" id="simple-dropdown">Filter Locations<div ng-show = "dateLocationBarController.locationsLoading" style="display:inline"><img ng-src = "/assets/images/loader2.gif" style = "max-width: 15px; margin-left:3px;"/></div></button>
+			      <div class="dropdown-menu locations-filters-dropdown" uib-dropdown-menu aria-labelledby="simple-dropdown">
+
+			      		<div class = "locations-filters-main-container">
+					        <div ng-repeat="city in dateLocationBarController.locations" >
+					        	<ul>
+						        		<li class = "location-city-container" ng-class="{'active': city.checked=='all' , 'semi-active': city.checked=='some'}"
+						        		>	
+						        			<i class = "fa fa-map-marker location-marker"></i> 
+						        			<div class = "location-city-name" ng-click="dateLocationBarController.toggleOutlets(city)">
+						        				{{city.city_name}}
+						        			</div>
+						        			<!-- square -->
+						        			<i ng-hide="city.checked=='all' || city.checked=='some' " class = "fa fa-square-o" ng-click="dateLocationBarController.selectAllOutletsForCity(city)"></i>
+
+						        			<!-- tick -->
+						        			<i ng-show="city.checked=='all'" class = "fa fa-check-square-o" ng-click="dateLocationBarController.deselectAllOutletsForCity(city)"></i>
+
+						        			<!-- dot -->
+						        			<i ng-show="city.checked=='some'" class = "fa fa-dot-circle-o" ng-click="dateLocationBarController.selectAllOutletsForCity(city)"></i>
+
+						        		</li>
+
+					        	</ul>
+					        	<ul>
+						        	<li ng-show="city.opened" class = "location-outlet" ng-repeat="outlet in city.locations" ng-class="dateLocationBarController.selectedLocations.indexOf(outlet.location_id) != -1 ? 'active' : ''" ng-click="dateLocationBarController.handleOutletClick(outlet,city)">		
+						        		{{outlet.location_name}}
+						        	</li>
+					        	</ul>
+					        </div>
+					    </div>
+					    <div class = "locations-apply-button">
+					    	<button class = "apply-button" ng-click="dateLocationBarController.applyChanges()">Apply</button>
+					    </div>
+			      </div>
+			</span>
+			
+		</ul>
+		
+
+	</div>
+
+</div>

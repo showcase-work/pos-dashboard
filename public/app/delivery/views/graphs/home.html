@@ -1,0 +1,65 @@
+<div class="container-fluid topBar deliveryHome" >
+	<div class = "loader home-loader" ng-if="home.isLoading">
+		<img class = "loader-img" ng-src = "/assets/images/loader2.gif"/>
+	</div>
+	<div  class="errorMessage" ng-if="!home.isLoading && home.hasError">
+		<h4 class="text-center "> SOME ERROR OCCURED</h4>
+	</div>
+	<div class="errorMessage" ng-if="!home.isLoading && !home.hasError && home.dataPieChart.length == 0">
+		<h4 class="text-center"> NO DATA AVAILABLE </h4>
+	</div>
+	<div class="row homeTopBlock" ng-if="!home.isLoading && !home.hasError && home.dataPieChart.length > 0">	
+		<div class=" col-xs-5 pieChart">
+			<delivery-pie-chart graphdata="home.dataPieChart"></delivery-pie-chart>
+		</div>
+		<div class="col-xs-7 cards">
+			<div class="row center-align cardRow">
+				<div class="col-xs-6 card">
+					<div class="deliveryTime block orange">
+						<h4 class="text-center">PICKUP TIME</h4>
+						<h4 class="bold text-center" ng-if="home.average.pickupTime!='NA'">{{ home.average.pickupTime/(60*1000) | number : 0}} minutes</h4>
+						<button class="btn btn-default showMoreButton flat center-align" ui-sref="graph({id :'205'})" ng-if="home.average.pickupTime!='NA'">
+							Show More
+						</button>
+						<h4 class="bold text-center" ng-if="home.average.pickupTime=='NA'">{{ home.average.pickupTime }}</h4>
+					</div>
+				</div>
+				<div class="col-xs-6 card">
+					<div class="deliveryTime block blue">
+						<h4 class="text-center">DELIVERY TIME</h4>
+						<h4 class="bold text-center" ng-if="home.average.deliveryTime!='NA'">{{ home.average.deliveryTime/(60*1000) | number : 0}} minutes</h4>
+						<div>
+						<button class="btn btn-default showMoreButton flat center-align" ui-sref="graph({id :'208'})" ng-if="home.average.deliveryTime!='NA'">
+							Show More
+						</button>
+						<h4 class="bold text-center" ng-if="home.average.deliveryTime=='NA'">{{ home.average.deliveryTime }}</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row center-align cardRow">
+				<div class="col-xs-6 card">
+					<div class="turnAroundTime block  green">
+						<h4 class="text-center">RESPONSE TIME</h4>
+						<h4 class="bold text-center" ng-if="home.average.turnAroundTime!='NA'">{{ home.average.turnAroundTime/(60*1000) | number : 0}} minutes</h4>
+						<button class="btn btn-default showMoreButton flat center-align" ui-sref = "graph({id : '203'})" ng-if="home.average.turnAroundTime!='NA'">
+							Show More
+						</button>
+						<h4 class="bold text-center" ng-if="home.average.turnAroundTime=='NA'">{{ home.average.turnAroundTime}}</h4>
+					</div>
+				</div>
+				<div class="col-xs-6 card">
+					<div class="deliveryTime block pink">
+						<h4 class="text-center"> REJECTED DELIVERIES </h4>
+						<h4 class="bold text-center" ng-if="home.average.rejectedPercentage!='NA'">{{ home.average.rejectedPercentage*100 | number : 2 }} %</h4>
+						<button class="btn btn-default showMoreButton flat center-align" ui-sref="graph({id:'224'})" ng-if="home.average.rejectedPercentage!='NA'">
+							Show More
+						</button>
+						<h4 class="bold text-center" ng-if="home.average.rejectedPercentage=='NA'">{{ home.average.rejectedPercentage }}</h4>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

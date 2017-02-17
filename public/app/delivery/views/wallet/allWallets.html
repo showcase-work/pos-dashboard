@@ -1,0 +1,43 @@
+<div class = "loader" ng-if="wallet.isLoading">
+	<img class = "loader-img" ng-src = "/assets/images/loader2.gif"/>
+</div>
+<div  class="no-wallet" ng-if="!wallet.isLoading && wallet.hasError">
+	<h4 class="text-center "> SORRY, SOME ERROR OCCURED WHILE GETTING YOUR WALLETS</h4>
+</div>
+<div class="no-wallet" ng-if="!wallet.isLoading && !wallet.hasError && wallet.wallets.length == 0">
+	<h4> YOU HAVEN'T SUBSCRIBED TO ANY WALLET</h4>
+</div>
+
+
+<div class="container-fluid wallet" ng-show="!wallet.isLoading && !wallet.hasError && wallet.wallets.length != 0">
+	
+	<table class="table">
+		<th>
+			WALLET ID
+		</th>
+		<th>
+			WALLET NAME
+		</th>
+		<th>
+			BALANCE
+		</th>
+		<th>
+			CREATED ON
+		</th>
+		<th>
+		 	LAST UPDATE
+		</th>
+		<th>
+			STATUS
+		</th>
+		<tr ng-repeat="wallet_data in wallet.wallets" ng-click="wallet.openModal(wallet_data)">
+			<td>{{ wallet_data.id}}</td>
+			<td>{{ wallet_data.identifier }}</td>
+			<td>Rs. {{ wallet_data.amount }}</td>
+			<td>{{ wallet_data.created_at | date  }}</td>
+			<td>{{ wallet_data.updated_at | date : "M/d/yy h:mm a" }}</td>
+			<td>{{ wallet.status(wallet_data.active) }}</td>
+		</tr>
+	</table>
+
+</div>

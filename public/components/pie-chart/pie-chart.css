@@ -1,0 +1,64 @@
+.pie{
+	border:1px solid #ebebeb;
+	background-color:white;
+	text-align: center;
+	display: inline-block;
+	vertical-align:top;
+	width:49%;
+	position:relative;
+	padding-top:22px;
+	padding-bottom:3px;
+	margin-right:2%;
+	position:relative;
+	height:49%;
+}
+
+.pie:nth-child(even){
+	margin-right:0px;
+}
+
+.pie h2{
+	font-size: 14px;
+	position: absolute;
+	left:10px;
+	top:-15px;
+}
+
+.pie .nv-legend-text
+{
+	font-size:8px !important;
+	position:absolute;
+	right:0px;	
+}
+
+.nv-label text{
+	font-size:10px !important;
+}
+
+
+.pie-chart-totals{
+	position:absolute;
+	width:20px;
+	display:inline-block;
+	left:27%;
+	top: 50%;
+	font-weight: bolder;
+	font-size:13px;
+}
+
+.pie .nvd3-svg{
+	padding-left: 9px !important;
+}
+
+.pie-charts-section{
+	height:71%;
+}
+
+.pie-chart{
+	display:block;
+	height:100%;
+}
+
+.pie img{
+	height:100%;
+}

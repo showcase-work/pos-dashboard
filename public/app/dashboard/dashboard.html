@@ -1,0 +1,30 @@
+<navbar style = "
+    width: 100%;
+    display: block;
+    position: absolute;
+"></navbar>
+<div class = "dashboard-container">
+
+	<div class = "side-nav">
+			<ul>
+				<li ui-sref-active="active"><a ui-sref="dashboard.dashboardview">Dashboard</a></li>
+				<li ui-sref-active="active"><a ui-sref="dashboard.orders">Orders</a></li>
+				 <!-- <li ui-sref-active="active"><a ui-sref="dashboard.delivery.home">Deliveries</a> -->
+				</li>
+			</ul>
+	</div>
+	<div class = "dashboard-view">
+
+		<dateLocationBar style="
+		display: block;
+		position: absolute;
+		width: 98%;
+		top:8px;">
+		</dateLocationBar>
+
+		<div style = "height:100%;" ui-view="">
+		
+		</div>
+	</div>
+</div>
+<!-- <highchart id="chart1" config="chartConfig"></highchart> -->

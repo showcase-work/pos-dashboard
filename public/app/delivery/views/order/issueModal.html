@@ -1,0 +1,48 @@
+<div class="issueModal">
+	<div class="modal-header ">
+		<h3 class="modal-title">RAISE ISSUE FOR ORDER ID {{issue.details.orderId}}</h3>
+	</div>
+	<div class="modal-body">
+		<div class="errorMessage" ng-if="issue.hasError">
+			SOME ERROR OCCURED. PLEASE TRY AGAIN
+		</div>
+		<div class = "loader issue-loader" ng-if="issue.isLoading">
+			<img class = "loader-img" ng-src = "/assets/images/loader2.gif"/>
+		</div>
+		<div class="alert alert-success alert-dismissable" ng-if="!issue.isLoading && issue.success">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			Your Complaint has been recoreded with reference number {{ issue.refNo }}
+		</div>
+		<form ng-if="!issue.isLoading && !issue.hasError" name="issueForm">
+			<div class="row">
+				<div class="form-group col-sm-6 col-xs-12">
+					<label>Name</label>
+					<input class="form-control" name="username" ng-model="issue.form.name" type="text" required="true" ng-maxlength="50"></input>
+					<span class="error" ng-show="issueForm.username.$error.maxlength">
+        			Name can't be longer than 20 characters</span>
+				</div>
+				<div class="form-group col-sm-6 col-xs-12">
+					<label>E-Mail</label>
+					<input class="form-control" name="useremail" ng-model="issue.form.email" type="email" requied="true"></input>
+					<span class="error" ng-show="issueForm.useremail.$error.email">
+        				Not a valid email.
+        			</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Description</label>
+				<textarea class="form-control" ng-model="issue.form.description" name="description" type="text" required="true" ng-maxlength="10000" ></textarea>
+				<span class="error" ng-show="issueForm.description.$error.maxlength">
+        		Description is too long!</span>
+			</div>
+			<div class="buttonRow">
+				<button class="btn btn-sm btn-default btn-primary center-align" ng-disabled = "issueForm.username.$error.maxlength || issueForm.description.$error.maxlength || issueForm.useremail.$error.email" ng-click="issue.submitForm()">
+					SUBMIT
+				</button>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" type="button" ng-click="issue.closeModal()">Close</button>
+	</div>
+</div>

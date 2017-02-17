@@ -1,0 +1,51 @@
+.transactionModal table {
+	text-align: left;
+    border: 1px solid #ebebeb;
+    width: 100%;
+    background-color: white;
+}
+
+.transactionModal table th {
+	background-color: #f3f3f3 !important;
+	color:black;
+}
+
+.transactionModal table tr {
+    border: 1px solid #ebebeb;
+}
+
+.transactionModal table tr td,
+.transactionModal table tr th {
+    padding: 10px;
+    font-size:12px;
+    border : 1px solid #ebebeb;
+}
+.transactionModal .button {
+    margin-left : 5px;
+    margin-right: 5px;
+    float: right;
+}
+
+.center-align{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.no-data {
+    background-color: white;
+    width : 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    color : #24323f;
+    padding: 20px;
+}
+
+.transactionModal .subscription-loader {
+    min-height: 100px;
+}
+
+.transactionModal .transaction-loader {
+    min-height: 600px;
+    padding-top: 30%;
+}

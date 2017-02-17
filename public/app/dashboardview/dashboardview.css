@@ -1,0 +1,242 @@
+.main-content-view{
+    display: inline-block;
+    width: 100%;
+    vertical-align:top;
+    height:100%;
+}
+
+.dashboard-card{
+    position:relative;
+    height:29%;
+    padding:41px 0px 36px 0px;
+    width:32%;
+    display:inline-block;
+    margin-right:2%;
+    vertical-align:top;
+}
+
+.dashboard-card .percentage-bar{
+    background-color:white;
+    height: 15px;
+    min-width:1px;
+    max-width: 100%;
+}
+
+.dashboard-card .percentage-bar-row{
+    width:50px; 
+    padding-left:10px;
+    display: block;
+    position:relative;
+}
+
+.dashboard-card .card-title
+{
+    position: absolute;
+    top: 2px;
+    left:4px;
+    font-size:11px;
+}
+
+.dashboard-card .toggle-button
+{
+    position:absolute;
+    top: 2px;
+    right: 4px;
+    font-size:9px;
+    border-top-left-radius: 110px;  /* 100px of height + 10px of border */
+    border-bottom-left-radius: 110px;
+    border-top-right-radius: 110px;  /* 100px of height + 10px of border */
+    border-bottom-right-radius: 110px;
+    width: 63px;
+    height: 18px;
+    background-color: white;
+    overflow: hidden;
+    color: black;
+}
+
+.dashboard-card .toggle-button .toggle-circle{
+    width:18px;
+    height:18px;
+    border-radius: 100%;
+}
+
+.dashboard-card .toggle-button .toggle-content{
+    white-space: nowrap;
+    -webkit-transition: margin-left 1s;
+    cursor:pointer;
+}
+
+.toggle-mode{
+    padding-left: 10px;
+    padding-right: 8px;
+}
+
+.toggle-source{
+    padding-left: 3px;
+
+}
+
+.dashboard-card .dashboard-content-left{
+    display: inline-block;
+    vertical-align: top;
+    width:50%;
+    position:relative;
+}
+
+.dashboard-card .dashboard-content-right{
+    display: inline-block;
+    vertical-align: top;
+    width:50%;
+    border-left: 2px solid rgba(255,255,255,0.6);
+    text-align:center;
+}
+
+.dashboard-card .view-more{
+    position: absolute;
+    right: 4px;
+    bottom: 2px;
+    font-size:11px; 
+}
+
+.dashboard-card .total-number{
+    font-size: 28px;
+    display:inline-block;
+    text-align: center;
+}
+
+.stats-table{
+    display: inline-block;
+    text-align:left;
+    font-size:12px;
+}
+.total-number-container{
+    right:0px;
+    left:0px;
+    margin: auto;
+    display:inline-block;
+    margin-top:5px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+
+}
+.dashboard-card .stats{
+    display:inline-block;
+    font-size:12px;
+}
+
+.revenue{
+    background-color: #40c381;
+    color: white;
+}
+
+.orders{
+    background-color: #65c6bb;
+    color: white;
+}
+
+.averageBasketSize{
+    background-color: #eb3766;
+    color: white;
+}
+
+.stat-value{
+    background-color: white;
+} 
+
+.revenue .stat-value{
+    color:#40c381;
+}
+
+.orders .stat-value{
+    color:#65c6bb;
+}
+
+.averageBasketSize .stat-value{
+    color:#eb3766;
+}
+
+.loader{
+    text-align: center;
+    position:relative;
+}
+
+.loader-img{
+    position: absolute;
+    display: inline-block;
+    right: 0px;
+    left: 0px;
+    margin: auto;
+}
+
+.dashboard-content .graph-section{
+    width:50%;
+    display: inline-block;
+    vertical-align:top;
+    padding: 20px;
+    padding-left:0px;
+    padding-right:5px;
+    padding-top: 13px;
+    padding-bottom: 0px;
+}
+.dashboard-content .pie-charts-section{
+    width:50%;
+    display: inline-block;
+    vertical-align:top;
+    padding: 20px;
+    padding-right:0px;
+    padding-left:5px;
+    padding-top:13px;
+    padding-bottom:0px;
+}
+
+.graph{
+    padding-top:9px;
+    border:1px solid #ebebeb;
+    background-color:white;
+    position:relative;
+}
+.day-type-selector{
+    position:absolute;
+    right:5px;
+    top:5px;
+    width:90px;
+    background-color: white;
+    border: 1px solid #ebebeb;
+    box-shadow: none;
+    font-size: 13px;
+}
+
+.dashboard-card .hover-box{
+    position:absolute;
+    top:-10px;
+    background-color: rgba(0,0,0,0.5);
+    padding:5px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index:2000;
+}
+
+.dashboard-card .percentage-bar-row-container{
+    cursor: pointer;
+}
+
+.dashboard-card .card-content{
+    display:inline-block;
+    position:absolute;
+    width:100%;
+    padding:10px;
+    top:50%;
+    margin:auto;
+    margin-top: -50px;
+}
+
+.empty-graph-img img{
+    width: 100%;
+    border:1px solid #ebebeb;
+    height:100%;
+}
+
+.empty-graph-img{
+    height:100%;
+}

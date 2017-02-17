@@ -1,0 +1,45 @@
+.wallet table {
+	text-align: left;
+    border: 1px solid #ebebeb;
+    width: 100%;
+    background-color: white;
+}
+
+.wallet table th {
+	background-color: #f3f3f3;
+	color:black;
+}
+
+.wallet table tr {
+    border: 1px solid #ebebeb;
+}
+
+.wallet table tr td,
+.wallet table tr th {
+    padding: 10px;
+    font-size:12px;
+    border : 1px solid #ebebeb;
+}
+.wallet {
+	color:black;
+    margin-top: 20px;
+}
+
+.wallet table tr{
+    cursor:pointer;
+    border: 1px solid #ebebeb;
+}
+
+.wallet table tr:hover {
+    background-color: #efefef;
+}
+
+.no-wallet {
+    background-color: white;
+    width : 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    color : #24323f;
+    padding: 20px;
+}

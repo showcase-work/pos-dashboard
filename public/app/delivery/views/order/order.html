@@ -1,0 +1,275 @@
+<div class="container-fluid deliveryOrders">
+	
+	<table class="table order-table" >
+		<th class="text-center" uib-dropdown auto-close="outsideClick" is-open="order.dropdown.orderId">
+			<button id ="search" class="btn btn-default flat table-header" ng-disabled = "!order.filterOpen" type="button" uib-dropdown-toggle>
+				ORDER ID {{ order.test }}
+				<span class="filters" ng-show="order.filterOpen">
+					<i class="fa fa-caret-down" aria-hidden="true"></i>
+				</span>
+			</button>
+
+			<div class="search custom-dropdown" uib-dropdown-menu role="menu" aria-labelledby="search">
+				<div class=" searchBox form-group" ng-form name="searchBox">
+					<div class="input-group">
+						<input type="text" name="search" class="form-control flat" placeholder="Search" ng-model="order.filters.orderId" ng-maxlength="15"  ng-keyup= "!searchBox.search.$error.maxlength && $event.which === 13 && order.setFilterData('orderId')">
+
+						<span class="input-group-btn">
+							<button class="btn btn-default flat" type="button" ng-click="order.setFilterData('orderId')" ng-disabled = "searchBox.search.$error.maxlength">
+							<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</span>
+					</div>
+					<div class="error" ng-show="searchBox.search.$error.maxlength">
+        				Must be less than 10 characters</div>
+				</div>
+
+			</div>
+		</th>
+		<th class="text-center" >
+			ORDER DATE
+		</th>
+		<th class="text-center" uib-dropdown auto-close="outsideClick" is-open="order.dropdown.partners">
+			PARTNER
+				<!-- <button id="partners" class="btn btn-default flat table-header" type="button" ng-disabled = "!order.filterOpen" uib-dropdown-toggle>
+					PARTNER
+					<span class="filters" ng-show="order.filterOpen">
+						<i class="fa fa-caret-down" aria-hidden="true"></i>
+					</span>
+				</button>
+				<div class="partners custom-dropdown" uib-dropdown-menu role="menu" aria-labelledby ="partners">
+					<ul class="partner-list">
+						<li ng-repeat ="partner in order.partners">
+							<input type="checkbox" ng-click = "order.partnerCheckBox(partner.id)" /> {{ partner.name | uppercase }}
+						</li>
+					</ul>
+					<button class="btn btn-default flat" ng-click="order.setFilterData('partners')">Apply</button>
+				</div> -->
+			</th>
+			<th class="text-center" uib-dropdown auto-close="outsideClick" is-open="order.dropdown.status">
+				<button id="status" class="btn btn-default flat table-header" ng-disabled = "!order.filterOpen" uib-dropdown-toggle>
+					STATUS
+					<span class="filters" ng-show="order.filterOpen">
+						<i class="fa fa-caret-down" aria-hidden="true"></i>
+					</span>
+				</button>
+				<div class="status dropdown-menu custom-dropdown" uib-dropdown-menu aria-labelledby="status">
+					<ul class="status-list">
+						<li ng-repeat = "(key,value) in order.statusKey">
+							<input type="checkbox" ng-click="order.statusCheckBox(key)" ng-checked="order.checked('status',key)" />
+							<label> {{ value }}</label>
+						</li>
+					</ul>
+					<button class="btn btn-default btn-sm" ng-click="order.setFilterData('status')">Apply</button>
+				</div>
+			</th>
+			<th class="text-center" uib-dropdown auto-close="outsideClick" is-open="order.dropdown.turnaroundTimeDiff">
+				<button id="response" class="btn btn-default flat table-header" ng-disabled = "!order.filterOpen" uib-dropdown-toggle>
+					RESPONSE TIME
+					<span class="filters" ng-show="order.filterOpen">
+						<i class="fa fa-caret-down" aria-hidden="true"></i>
+					</span>
+				</button>
+				<ul class="dropdown-menu searchBox custom-dropdown" uib-dropdown-menu aria-labelledby="response">
+					<rzslider rz-slider-model="order.filters.turnaroundTimeDiff.from"
+					rz-slider-high="order.filters.turnaroundTimeDiff.to"
+					rz-slider-options="order.responseTimeSlider.options">
+				</rzslider>
+				<button class="btn btn-default flat" ng-click="order.setFilterData('turnaroundTimeDiff')">Apply</button>
+			</ul>
+		</th>
+		<th class="text-center" uib-dropdown auto-close="outsideClick" is-open="order.dropdown.pickupTimeDiff">
+			<button id="pickup" class="btn btn-default flat table-header" ng-disabled = "!order.filterOpen" uib-dropdown-toggle>
+				PICKUP TIME
+				<span class="filters" ng-show="order.filterOpen">
+					<i class="fa fa-caret-down" aria-hidden="true"></i>
+				</span>
+			</button>
+			<ul class="dropdown-menu pickup searchBox custom-dropdown" uib-dropdown-menu aria-labelledby="pickup">
+				<rzslider rz-slider-model="order.filters.pickupTimeDiff.from"
+				rz-slider-high="order.filters.pickupTimeDiff.to"
+				rz-slider-options="order.responseTimeSlider.options">
+			</rzslider>				
+			<button class="btn btn-default flat" ng-click="order.setFilterData('pickupTimeDiff')">Apply</button>
+		</ul>
+	</th>
+	<th class="text-center" uib-dropdown auto-close="outsideClick" is-open="order.dropdown.deliveryTimeDiff">
+		<button id="delivery" class="btn btn-default flat table-header" ng-disabled = "!order.filterOpen" uib-dropdown-toggle>
+			DELIVERY TIME
+			<span class="filters" ng-show="order.filterOpen">
+				<i class="fa fa-caret-down" aria-hidden="true"></i>
+			</span>
+		</button>
+		<ul class="dropdown-menu response searchBox custom-dropdown" uib-dropdown-menu aria-labelledby="delivery">
+			<rzslider rz-slider-model="order.filters.deliveryTimeDiff.from"
+			rz-slider-high="order.filters.deliveryTimeDiff.to"
+			rz-slider-options="order.deliveryTimeSlider.options">
+		</rzslider>
+		<button class="btn btn-default flat" ng-click="order.setFilterData('deliveryTimeDiff')">Apply</button>
+	</ul>
+</th>
+			<!-- <th class="text-center" uib-dropdown auto-close="outsideClick">
+				<button id="cost" class="btn btn-default flat table-header" ng-disabled = "!order.filterOpen" uib-dropdown-toggle>
+					COST
+					<span class="filters" ng-show="order.filterOpen">
+						<i class="fa fa-caret-down" aria-hidden="true"></i>
+					</span>
+				</button>
+				<ul class="dropdown-menu response custom-dropdown" uib-dropdown-menu aria-labelledby="cost">
+					<li>
+						<label>From</label>
+						<input class="form-control" type="number" ng-model ="order.filters.cost.from">
+						</input>
+					</li>
+					<li>
+						<label>To</label>
+						<input class="form-control" type="number" ng-model ="order.filters.cost.to">
+						</input>
+					</li>
+
+				</ul>
+			</th> -->
+			<!-- <th class="text-center" uib-dropdown auto-close="outsideClick">
+				<button id="distance" class="btn btn-default flat table-header" ng-disabled = "!order.filterOpen" uib-dropdown-toggle>
+					DISTANCE
+					<span class="filters" ng-show="order.filterOpen">
+						<i class="fa fa-caret-down" aria-hidden="true"></i>
+					</span>
+				</button>
+				<ul class="dropdown-menu response custom-dropdown" uib-dropdown-menu aria-labelledby="distance">
+					<li>
+						<label>From</label>
+						<input class="form-control" type="number" ng-model ="order.filters.distance.from">
+						</input>
+					</li>
+					<li>
+						<label>To</label>
+						<input class="form-control" type="number" ng-model ="order.filters.distance.from">
+						</input>
+					</li>
+
+				</ul>
+			</th> -->
+			<th class="text-center" uib-dropdown auto-close="outsideClick">
+				<button class="btn btn-sm btn-default  filterToggleButton flat" ng-click = "order.toggleFilters()">FILTERS</button>
+			</th>
+			<tr ng-show="order.filterOpen">
+				<td colspan="8">
+					<div id="filter-list" class="filter-list">
+						<div class="filters">
+							<span>
+								<button class="btn btn-default btn-sm btn-filter" ng-if="order.filterShow.orderId!=''" ng-click = "order.removeFilters('orderId')">
+									ID : {{ order.filterShow.orderId }} <i class="fa fa-times" aria-hidden="true"></i>
+								</button>
+							</span>
+							<span ng-repeat = "partner in order.filterShow.partners" ng-if="order.filterShow.partners.length > 0">
+								<button ng-if="order.checked('partners',partner')" class='btn btn-default btn-sm btn-filter' ng-click="order.removeFilterElements('partners',partner)">
+									{{ order.findPartnerName(partner) | uppercase }} <i class="fa fa-times" aria-hidden="true"></i>
+								</button>
+							</span>
+							<span ng-repeat = "status_data in order.filterShow.status" ng-if="order.filterShow.status.length > 0">
+								<button class='btn btn-default btn-sm btn-filter' ng-click = "order.removeFilterElements('status',status_data)">
+									{{ order.getStatus(status_data) }} <i class="fa fa-times" aria-hidden="true"></i>
+								</button>
+							</span>
+							<span>
+								<button class="btn btn-default btn-sm btn-filter" ng-if="order.filterShow.deliveryTimeDiff!='' " ng-click="order.removeFilters('deliveryTimeDiff')">
+									DELIVERY TIME : {{order.filterShow.deliveryTimeDiff.from}} - {{ order.filterShow.deliveryTimeDiff.to }} mins <i class="fa fa-times" aria-hidden="true"></i>
+								</button>
+							</span>
+							<span>
+								<button class="btn btn-default btn-sm btn-filter" ng-if="order.filterShow.turnaroundTimeDiff!='' " ng-click ="order.removeFilters('turnaroundTimeDiff')">
+									RESPONSE TIME : {{order.filterShow.turnaroundTimeDiff.from}} - {{ order.filterShow.turnaroundTimeDiff.to }} mins<i class="fa fa-times" aria-hidden="true"></i>
+								</button>
+							</span>
+							<span>
+								<button class="btn btn-default btn-sm btn-filter" ng-if="order.filterShow.pickupTimeDiff!='' " ng-click = "order.removeFilters('pickupTimeDiff')">
+									PICKUP TIME : {{order.filterShow.pickupTimeDiff.from}} - {{ order.filterShow.pickupTimeDiff.to }} mins<i class="fa fa-times" aria-hidden="true"></i>
+								</button>
+							</span>
+						</div>
+
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan ="8" ng-show="order.isLoading || order.hasError || (order.orders.length == 0)">
+					<div class = "loader order-loader" ng-if="order.isLoading">
+						<img class = "loader-img" ng-src = "/assets/images/loader2.gif"/>
+					</div>
+					<div class="message" ng-if="!order.isLoading && !order.hasError && (order.orders.length == 0)">
+						<h4> NO ORDERS FOUND</h4>
+					</div>
+					<div class="message" ng-if="!order.isLoading && order.hasError">
+						<h4> SOME ERROR OCCURED </h4>
+					</div>
+				</td>
+			</tr>
+			<tr ng-repeat = "order_data in order.orders track by $index" ng-if="!order.isLoading && !order.hasError && order.orders.length!=0" ng-click="order.setCurrentRow(order_data.logisticId)" ng-class="order.currentRow == order_data.logisticId ? 'active' : ''">
+				<td class="text-center">
+					<p class="text" ng-if="order_data.orderId == ''">-</p>
+					<p class="text" class="text" ng-if="order_data.orderId!=''">{{ order_data.orderId }}</p>
+					<p class="help-text"ng-if="order_data.orderId!='' && order.currentRow == order_data.logisticId">
+						{{ order_data.customerName }}
+						<br>
+						{{ order_data.customerPhone }}
+					</p>
+				</td>
+				<td class="text-center">
+					<p class="text" ng-if="order_data.deliveryRequestTime == ''">-</p>
+					<p class="text" ng-if="order_data.deliveryRequestTime != ''">{{ order_data.deliveryRequestTime | date : "MMM d,yyyy"}}</p>
+					<p class="help-text"ng-if="order_data.deliveryRequestTime!='' && order.currentRow == order_data.logisticId">
+						{{ order_data.deliveryRequestTime | date : "h:mm a" }}
+					</p>
+				</td>
+				<td class="text-center">
+					<p class="text" ng-if="order_data.logisticService==''">-</p>
+					<p class="text" ng-if="order_data.logisticService!=''">
+						{{ order_data.logisticService }}
+					</p>
+				</td>
+				<td class="text-center">
+					<p class="text" ng-if="order_data.currentStatus==''">-</p>
+					<p class="text" ng-if="order_data.currentStatus!=''">{{ order.getStatus(order_data.status) }}</p>
+				</td>
+				<td class="text-center">
+					<p class="text" ng-if="!order_data.hasOwnProperty('turnarroundTime')">-</p>
+					<p class="text" ng-if="order_data.hasOwnProperty('turnarroundTime')">{{ order_data.turnarroundTime/(60*1000) | number : 2 }} mins</p>
+					<p class="help-text"ng-if="order_data.hasOwnProperty('turnarroundTime') && order.currentRow == order_data.logisticId">
+						From : {{ order_data.deliveryRequestTime | date :"h:mm a" }}
+						<br>
+						To : {{ order_data.riderAllotedTime | date : "h:mm a" }}
+					</p>
+				</td>
+				<td class="text-center">
+					<p class="text" ng-if="!order_data.hasOwnProperty('pickupTimeDiff')">-</p>
+					<p class="text" ng-if="order_data.hasOwnProperty('pickupTimeDiff')">{{order_data.pickupTimeDiff/(60*1000) | number : 0  }} mins</p>
+					<p class="help-text"ng-if="order_data.hasOwnProperty('pickupTimeDiff') && order.currentRow == order_data.logisticId">
+						From : {{ order_data.deliveryRequestTime | date :"h:mm a" }}
+						<br>
+						To : {{ order_data.pickupTime | date : "h:mm a" }}
+					</p>
+				</td>
+				<td class="text-center">
+					<p class="text" ng-if="!order_data.hasOwnProperty('deliveryTimeDiff')">-</p>
+					<p class="text" ng-if="order_data.hasOwnProperty('deliveryTimeDiff')">{{order_data.deliveryTimeDiff/(60*1000) | number : 0 }} mins</p>
+					<p class="help-text"ng-if="order_data.hasOwnProperty('deliveryTimeDiff') && order.currentRow == order_data.logisticId">
+						From : {{ order_data.deliveryRequestTime | date :"h:mm a" }}
+						<br>
+						To : {{ order_data.deliveryTime | date : "h:mm a" }}
+					</p>
+				</td>
+				<!-- <td class="text-center"> Rs. 75 </td>
+				<td class="text-center"> 8 Kms </td> -->
+				<td class="text-center"> 
+					<button class="btn btn-xs btn-default issue-button" ng-click="order.openModal(order_data)" ng-class="order.currentRow == order_data.logisticId ? 'activeButton' : ''">RAISE ISSUE</button>
+				</td>	
+			</tr>
+		</table>
+		<div class="pagination-bar text-center" ng-if="!order.isLoading && !order.hasError && order.orders!=''">
+			<uib-pagination  class="text-center center-align" total-items="order.totalOrders" ng-model="order.page" ng-change="order.pageChanged()" max-size="order.maxSize" boundary-link-numbers="true"></uib-pagination>
+
+		</div>
+	</div>
+	
+</div>

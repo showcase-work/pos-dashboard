@@ -1,0 +1,202 @@
+<button lazy-load="true" class = "download-btn-original btn" style="display:none;" ng-csv="OrdersComponent.arrayToExportFinal" filename="report.csv" csv-header="OrdersComponent.exportCSVHeaders"><i class = "fa fa-download"></i></button>
+<div class = "loader" ng-if="OrdersComponent.ordersLoading"><img class = "loader-img" ng-src = "/assets/images/loader2.gif"/></div>
+<div class = "orders-view" ng-hide="OrdersComponent.ordersLoading">
+    <div class = "main-orders-view" >
+    <div class = "download-button-container">
+        <button class = "download-btn btn" ng-click="OrdersComponent.getarraytoDownloadForButton()"><i class = "fa fa-download"></i></button>
+    </div>
+    <div class = "search-box">
+        <form ng-submit="OrdersComponent.searchInAllOrders()" class="inline-block">
+        <input type ="text" class="search-box-input form-control inline-block" placeholder="search..." ng-model = "searchBox" name = "text" ng-change="OrdersComponent.watchSearchBox(searchBox)" />
+        <button type = "submit" class="search-button" ng-hide="OrdersComponent.searching == 'done' || OrdersComponent.searching == 'starting' "><i class = "fa fa-search inline-block"></i></button>
+        </form>
+        <div ng-show = "OrdersComponent.searching == 'starting'" class = "inline-block"><img ng-src = "/assets/images/loader2.gif" style = "max-width: 12px;" /></div>
+        <i ng-show="OrdersComponent.searching == 'done'" ng-click="OrdersComponent.clearSearch()" class = "fa fa-times inline-block"></i>
+    </div>
+
+        <table class = "orders-table">
+            <thead>
+                <tr>
+                    <th class = "ref">Ref No.</th><th class = "outlet">Outlet</th><th class = "name">Name</th><th class = "mobile">Mobile</th><th class = "time">Time</th><th class = "bill">Mode</th><th class = "source">Source</th>
+                </tr>
+            </thead>
+            <tbody ng-hide="OrdersComponent.searching =='done' ">
+                <tr ng-repeat = "order in OrdersComponent.orders" ng-click = "OrdersComponent.showOrderDetails(order)" ng-class="OrdersComponent.selectedOrder === order ? 'active' : ''">
+                    <td class = "ref">
+                    {{order.reference_bill_number || '-'}}</td><td class = "outlet">
+                    {{order['Location.location_name']}}</td><td class = "name">
+                    {{order['User.first_name'] || '-'}}&nbsp{{order['User.last_name']}}</td><td class = "mobile">{{order['User.user_mobile_phone_number'] || '-'}}</td><td class = "time">
+                    {{order.date_added | date:'longDate'}}</td><td class = "bill">{{OrdersComponent.getPaymentModeFunction(order.payment_mode) || '-'}}</td><td class = "source">
+                    <div class = "order-source-type {{order['OrderSource.source_name']}}">{{order['OrderSource.source_name']}}</div></td>
+                </tr>
+                <tr><td class = "load-more-button">
+                    <button ng-hide="OrdersComponent.loaderStatus == 'loading' || OrdersComponent.loaderStatus == 'nomore'" class = "btn btn-primary" ng-click="OrdersComponent.loadMoreOrders()">
+                        Load More
+                    </button>
+                    <div ng-show = "OrdersComponent.loaderStatus == 'loading'" class = "inline-block" style="margin-left:8%;"><img ng-src = "/assets/images/loader2.gif" style = "max-width: 30px;"/></div>
+
+                </td></tr>
+            </tbody>
+            <tbody ng-show="OrdersComponent.searching =='done'">
+                <tr ng-repeat = "order in OrdersComponent.searchResults" ng-click = "OrdersComponent.showOrderDetails(order)" ng-class="OrdersComponent.selectedOrder === order ? 'active' : ''">
+                    <td class = "ref">
+                    {{order.reference_bill_number || '-'}}</td><td class = "outlet">
+                    {{order['Location.location_name'] || '-'}}</td><td class = "name">
+                    {{order['User.first_name'] || '-'}}&nbsp{{order['User.last_name']}}</td><td class = "mobile">{{order['User.user_mobile_phone_number'] || '-'}}</td><td class = "time">
+                    {{order.date_added | date:'longDate'}}</td><td class = "bill">{{OrdersComponent.getPaymentModeFunction(order.payment_mode) || '-'}}</td><td class = "source">
+                    <div class = "order-source-type {{order['OrderSource.source_name']}}">{{order['OrderSource.source_name']}}</div></td>
+                </tr>
+                <tr><td class = "load-more-button">
+                        <button ng-hide="OrdersComponent.noSearchResults || OrdersComponent.loaderStatus == 'loading' || OrdersComponent.loaderStatus == 'nomore'" class = "btn btn-primary" ng-click="OrdersComponent.loadMoreSearchOrders()">
+                            Load More
+                        </button>
+                        <div ng-show = "OrdersComponent.loaderStatus == 'loading'" class = "inline-block" style="margin-left:8%;"><img ng-src = "/assets/images/loader2.gif" style = "max-width: 30px;"/></div>
+                        <div style = "margin-left:-10%;" ng-show="OrdersComponent.noSearchResults">No results found for this search</div>
+                    </td></tr>
+            </tbody>
+        </table>
+    </div><div class = "order-details-view">
+        <div class = "order-details" ng-if = "OrdersComponent.orderDetails != '' && OrdersComponent.orderDetails !='err' ">
+            <div class = "order-details-card order-id">
+                 <span ng-show="OrdersComponent.orderDetails.bill_number">Bill No. &nbsp</span>{{OrdersComponent.orderDetails.bill_number}} 
+            </div>
+            <div class = "order-details-card order-type-and-date">
+                <div class = "order-type" ng-show="OrdersComponent.orderDetails.order_type==0">
+                    <i class = "fa fa-truck green"></i>
+                    <div class = "type-name">
+                    Delivery
+                    </div>
+                </div>
+                <div class = "order-type" ng-show="OrdersComponent.orderDetails.order_type==1">
+                    <i class = "fa fa-cutlery green"></i>
+                    <div class = "type-name">
+                    Dine-in
+                    </div>
+                </div>
+                <div class = "order-type" ng-show="OrdersComponent.orderDetails.order_type==2">
+                    <i class = "fa fa-shopping-bag green"></i>
+                    <div class = "type-name">
+                    Takeaway
+                    </div>
+                </div>
+                <div class = "order-date">
+                    {{(OrdersComponent.orderDetails.date_added | date:'longDate') || (OrdersComponent.orderDetails.date | date:'longDate') ||(OrdersComponent.orderDetails.apiData.order_time | date:'longDate')}}
+                </div>
+            </div>
+            <div class = "order-details-card customer-details">
+                <ul class = "customer-details-list-container" ng-class="{'full_width': !OrdersComponent.orderDetails.apiData.deliveryDetails[0] || OrdersComponent.orderDetails.apiData.deliveryDetails[0]==' '}">
+                    <li><i class = "fa fa-user"></i>&nbsp {{ OrdersComponent.orderDetails['User.first_name'] || '-'}} {{OrdersComponent.orderDetails['User.last_name']}} <!-- || OrdersComponent.orderDetails.apiData.user_details.full_name || OrdersComponent.orderDetails.apiData.user_details.name || OrdersComponent.orderDetails.apiData.customer_details.name}} --></li>
+                    <li><i class = "fa fa-phone"></i>&nbsp {{OrdersComponent.orderDetails.apiData.user_details.mobile_number || OrdersComponent.orderDetails.apiData.user_details.mobile || OrdersComponent.orderDetails.apiData.customer_details.mobile || '-'}}</li>
+                    <li><i class = "fa fa-map-marker"></i>&nbsp {{OrdersComponent.orderDetails.apiData.user_details.address_line_1 || OrdersComponent.orderDetails.apiData.customer_details.address.address}}<span ng-hide="(OrdersComponent.orderDetails.apiData.user_details.address_line_1 && OrdersComponent.orderDetails.apiData.user_details.address_line_1 != ' ') || (OrdersComponent.orderDetails.apiData.customer_details.address.address && OrdersComponent.orderDetails.apiData.customer_details.address.address != ' ')">&nbsp-</span></li>
+                   <!--  <li>orderDetails[]</li> -->
+                </ul><ul class = "shadow-fax-container" ng-show="OrdersComponent.orderDetails.apiData.deliveryDetails[0]">
+                    <li class="deliveryService">{{OrdersComponent.orderDetails.apiData.deliveryDetails[0].logisticService}}</li>
+                    <li ng-show="OrdersComponent.getDeliveryState(OrdersComponent.orderDetails.apiData.deliveryDetails[0].status)">
+                        {{OrdersComponent.getDeliveryState(OrdersComponent.orderDetails.apiData.deliveryDetails[0].status)}}
+                    </li>
+                    <li>{{OrdersComponent.orderDetails.apiData.deliveryDetails[0].deliveryBoy}}</li>
+                    <li>{{OrdersComponent.orderDetails.apiData.deliveryDetails[0].deliveryBoyPhone}}</li>
+                </ul>
+            </div>
+            <div ng-show="OrdersComponent.orderDetails.apiData.status[0].date" class = "order-details-card order-status">
+
+                <div class = "orders-status-text">
+                    {{OrdersComponent.orderStatus}}
+                </div>
+
+                <div class = "order-status-bar delivery">
+                    <div class = "line line{{OrdersComponent.orderDetails.order_type}}" ng-class="{'source': OrdersComponent.orderDetails.source_id =='11'}"></div>
+                    <ul class = "state state{{OrdersComponent.orderDetails.order_type}}" ng-class="{'source': OrdersComponent.orderDetails.source_id =='11'}">
+                        <li class = "states-list" ng-repeat = "(key,state) in OrdersComponent.states" ng-class="{'state-active': state !=null}" ng-hide="key=='Cancelled'">
+                            <i class = "fa fa-check order-status-check-icon"></i>
+                            <div class = "state-name">
+                                {{key}}
+                            </div>
+                            <div class = "state-time">
+                                {{OrdersComponent.getStateTime(state.date) | date:'shortTime'}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class = "order-details-card order-menu-details">
+                <table class = "items-table">
+                    <thead>
+                        <tr>
+                            <th class="item" >ITEM</th><th class="qty">
+                            QTY</th><th class="amount" >
+                            AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody class ="menu-details-body">
+                        <tr class = "order-item" ng-repeat-start= "orderItem in OrdersComponent.orderDetails.apiData.order_cart.products || OrdersComponent.orderDetails.apiData.cart.items">
+                            <td valign="top">{{orderItem.name || orderItem.product_name}}</td><td valign="top">{{orderItem.quantity}}
+                            </td><td valign="top">&#8377; {{orderItem.price*orderItem.quantity || orderItem.product_price*orderItem.quantity || 0}}
+                            </td>
+                        </tr>
+                        <tr ng-if="orderItem.addons[0]" class = "order-addon-heading">
+                            <td>Add-on</td><td>
+                                
+                            </td><td>
+                                
+                            </td>
+                        </tr>
+                            <tr class = "order-addon" ng-repeat="addon in orderItem.addons" ng-repeat-end>
+                                <td>{{addon.addon_name}}</td><td>
+                                {{addon.addon_qty}}</td><td>
+                                &#8377; {{addon.addon_price}}</td>
+                            </tr>
+                                <!-- <tr class = "order-addon">
+                                    <td>Add on 2</td>
+                                    <td>1</td>
+                                    <td>Rs 100</td>
+                                </tr>
+                                <tr class = "order-addon">
+                                    <td>Add on 3</td>
+                                    <td>1</td>
+                                    <td>Rs 100</td>
+                                </tr> -->
+                        <!-- <tr class = "order-item">
+                            <td>Item 2</td>
+                            <td>1</td>
+                            <td>Rs 200</td>
+                        </tr>
+                        <tr class = "order-item">
+                            <td>Item 3</td>
+                            <td>2</td>
+                            <td>Rs 400</td>
+                        </tr> -->
+                        </tbody>
+                        <tbody>
+                        <tr class = "order-item-sub-total">
+                            <td>SUBTOTAL</td><td>
+                                
+                            </td><td>
+                            &#8377; {{OrdersComponent.orderDetails.apiData.order_cart.sub_total_price || OrdersComponent.orderDetails.apiData.order_cart.sub_total || OrdersComponent.orderDetails.apiData.cart.sub_total}}</td>
+                        </tr>
+                        <tr class = "discount-tax" ng-show = "(OrdersComponent.orderDetails.apiData.order_cart.discount_amount && OrdersComponent.orderDetails.apiData.order_cart.discount_amount != '0') || (OrdersComponent.orderDetails.apiData.cart.discount_amount && OrdersComponent.orderDetails.apiData.cart.discount_amount !='0') || (OrdersComponent.orderDetails.apiData.order_cart.discount_value && OrdersComponent.orderDetails.apiData.order_cart.discount_value !='0')">
+                            <td>Discount</td><td>
+                            {{OrdersComponent.orderDetails.apiData.cart.discount}}<span style = "display:inline;" ng-hide="OrdersComponent.orderDetails.apiData.cart.discount == ''|| !OrdersComponent.orderDetails.apiData.cart.discount">%</span>
+                            </td><td>
+                            &#8377; {{OrdersComponent.orderDetails.apiData.order_cart.discount_amount || OrdersComponent.orderDetails.apiData.cart.discount_amount || OrdersComponent.orderDetails.apiData.order_cart.discount_value}}</td>
+                        </tr>
+                        <tr class = "discount-tax" ng-repeat = "tax in OrdersComponent.orderDetails.apiData.order_cart.taxes || OrdersComponent.orderDetails.apiData.cart.taxes" ng-show = "(tax.tax_amount && tab.tax_amount !='0') || (tax.amount && tab.amount !='0')">
+                            <td>{{tax.label || tax.tax_label}}</td><td>
+                            <span style = "display:inline;" ng-hide="tax.charge == ''|| !tax.charge || tax.charge==0 || tax.denomination=='1' || tax.denomination=='2' ">{{tax.charge || tax.tax_value}}%</span></td><td>
+                            &#8377; {{tax.amount || tax.tax_amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class = "order-amount-total">
+                Order Total
+                <div class = "total-amount">
+                    &#8377; {{OrdersComponent.orderDetails.apiData.order_cart.total_price || OrdersComponent.orderDetails.apiData.cart.total || OrdersComponent.orderDetails.apiData.order_cart.total}}
+                </div>
+            </div>
+        </div>
+        <div ng-if = "OrdersComponent.orderDetails == ''" class = "order-page-loader"><img ng-src = "/assets/images/loader2.gif" style = "max-width: 50px;" /></div>
+        <div ng-if = "OrdersComponent.orderDetails == 'err'" class = "order-page-loader">Details Not Available</div>
+    </div><!-- order details view -->
+</div>

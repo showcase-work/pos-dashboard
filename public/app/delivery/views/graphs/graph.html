@@ -1,0 +1,25 @@
+<div class="container-fluid topBar deliveryGraph" >
+	<div class = "loader graph-loader" ng-if="graph.isLoading">
+		<img class = "loader-img" ng-src = "/assets/images/loader2.gif"/>
+	</div>
+	<div  class="errorMessage" ng-if="!graph.isLoading && graph.hasError">
+		<h4 class="text-center "> DATA NOT AVAILABLE</h4>
+	</div>
+	<div ng-if="!graph.isLoading && !graph.hasError">
+		<div ng-class="graph.colorConstants[graph.current]" class="headingBar">
+			<h3> {{ graph.constants[graph.current] }}</h3>
+			<button class="btn btn-default btn-sm flat customButton" ui-sref="dashboard.delivery.home">
+			Show Less
+		</button>
+		</div>
+		
+		<div class="row graph-block">
+			<div class="col-xs-5">
+		        <delivery-bar-graph graphdata="graph.dataBarGraph"></delivery-pie-chart>			
+		        </div>
+			<div class="col-xs-7">
+				<delivery-line-chart graphdata="graph.dataLineChart"></delivery-pie-chart>
+			</div>
+		</div>
+	</div>
+</div>

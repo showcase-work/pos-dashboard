@@ -1,0 +1,211 @@
+/*.deliveryOrders {
+    min-height: 550px;
+}
+*/
+
+.deliveryOrders {
+    padding: 0px;
+    margin: 0px;
+}
+.deliveryOrders table {
+	text-align: left;
+    border: 1px solid #ebebeb;
+    width: 100%;
+    background-color: white;
+    padding: 0px;
+}
+
+.deliveryOrders table th {
+	background-color: #f3f3f3;
+	color:black;
+}
+.deliveryOrders table tr td {
+    color:black;
+    vertical-align: middle;
+}
+
+.deliveryOrders table tr {
+    cursor:pointer;
+    border: 1px solid #ebebeb;
+}
+
+.deliveryOrders table tr:hover {
+    background-color: #f3f3f3;
+}
+
+.deliveryOrders table tr td,
+.deliveryOrders table tr th {
+    padding: 10px;
+    font-size:11px;
+    margin: 0px;
+    border : 1px solid #ebebeb;
+    vertical-align: middle; 
+}
+.deliveryOrders {
+	color:black;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.message {
+    background-color: white;
+    width : 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    color : #24323f;
+    padding: 20px;
+}
+.deliveryOrders table tr td i {
+    font-size: 16px;
+}
+
+.table-header {
+    background-color:#f3f3f3; 
+    border : 0px;
+    margin: 0px;
+    padding: 0px;
+    width : auto;
+    color: black;
+    font-size:11px;
+    font-weight: bold;
+}
+
+.table-header,
+.issue-button{
+    white-space: normal !important;
+    word-wrap: break-word;
+}
+
+.table-header[disabled] {
+    background-color:#f3f3f3 !important; 
+    border : 0px;
+    margin: 0px;
+    padding: 0px;
+    width : auto;
+    opacity: 1;
+    color: black;
+    font-weight: bold;
+}
+
+.table-header : hover,
+.table-header a : active, {
+    background-color: #f3f3f3;
+}
+
+.custom-dropdown {
+    padding: 0px;  
+    color:black;
+    background-color: white;
+    border-radius: 0px;
+    left: 0px;
+    min-width: 180px;
+    width: 100%;
+    font-size: 11px;
+}
+.custom-dropdown > ul > li {
+    text-align: left; 
+    border-bottom: solid #ebebeb 1px;
+    padding: 5px;
+    margin: 0px;  
+}
+
+.order-loader {
+    height: 150px;
+}
+
+#filter-list .filters {
+    display: inline-block;
+    min-height: 25px;
+}
+.issue-button {
+    border-color:#247ba0;
+    border-radius: 15px;
+    font-size: 10px;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.text {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    text-transform: capitalize;
+}
+.custom-dropdown >ul > li {
+    list-style-type: none;
+} 
+.order-loader {
+    vertical-align: middle;
+    min-height: 550px !important;
+}
+
+.help-text {
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.deliveryOrders .order-table .active td {
+    background-color: #24323f !important;
+    color: white !important;
+    white-space: normal !important;
+    word-wrap: break-word;
+}
+
+.issue-loader {
+
+    min-height: 200px;
+}
+
+.deliveryOrders .orderId,
+.deliveryOrders .date {
+    width: 12.5%
+}
+
+.deliveryOrders .status{
+    width: 13%
+}
+
+.deliveryOrders .partner {
+    width: 12%
+}
+
+.deliveryOrders .response,
+.deliveryOrders .delivery,
+.deliveryOrders .pickup,
+.deliveryOrders .filter {
+    width: 12.5%
+}
+
+.issueModal .buttonRow {
+    text-align: center;
+}
+
+.deliveryOrders .buttonActive {
+    background-color: white;
+}
+
+.deliveryOrders filterToggleButton {
+    border : solid #ebebeb 1px;
+}
+
+.deliveryOrders .custom-dropdown input[type=checkbox]:not(old){
+  width     : 2em;
+  margin    : 0;
+  padding   : 0;
+  font-size : 1em;
+  opacity   : 1;
+  vertical-align: middle;
+}
+
+.deliveryOrders .custom-dropdown input[type=checkbox]:not(old) + label{
+  display      : inline-block;
+  margin-left  : 0em;
+  line-height  : 1.5em;
+}
+
+.deliveryOrders .searchBox {
+    padding: 10px;
+}

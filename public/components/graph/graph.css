@@ -1,0 +1,19 @@
+nvd3-svg, .nv-wrap, .nv-focus{
+    height:100% !important;
+}
+
+.graph .nvd3-svg text{
+    font-size:10px !important;
+}
+
+.graph-section{
+    height:71%;
+}
+
+.graph{
+    height:100%;
+}
+
+.graph-directive-container{
+    height:100%;
+}

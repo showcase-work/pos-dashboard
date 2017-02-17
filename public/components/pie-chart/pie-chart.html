@@ -1,0 +1,28 @@
+<div style = "height:100%;">
+	
+	<div class = "pie">
+		<h2>Orders</h2>
+		<img src="assets/images/emptyDonut.jpg" ng-show="PieChartController.shortenByIndianFormat(graphdata.totals.orders) == '0' || !graphdata.totals.orders"/>
+		<div class = "pie-chart-totals" ng-hide="PieChartController.shortenByIndianFormat(graphdata.totals.orders) == '0' || !graphdata.totals.orders">{{PieChartController.shortenByIndianFormat(graphdata.totals.orders)}}</div>
+		<nvd3 class="pie-chart" options="PieChartController.options" data="graphdata.orders_type" ng-hide="PieChartController.shortenByIndianFormat(graphdata.totals.orders) == '0' || !graphdata.totals.orders"></nvd3>
+	</div><div class = "pie">
+		<h2>Customers</h2>
+		<img src="assets/images/emptyDonut.jpg" ng-show="PieChartController.shortenByIndianFormat(graphdata.totals.customers) == '0' || !graphdata.totals.customers"/>
+		<div class = "pie-chart-totals" ng-hide="PieChartController.shortenByIndianFormat(graphdata.totals.customers) == '0' || !graphdata.totals.customers">{{PieChartController.shortenByIndianFormat(graphdata.totals.customers)}}</div>
+		<nvd3 class="pie-chart" options="PieChartController.options" data="graphdata.customers_new_old" ng-hide="PieChartController.shortenByIndianFormat(graphdata.totals.customers) == '0' || !graphdata.totals.customers"></nvd3>
+	</div><div class = "pie" style = "top:2%;">
+		<h2>Acceptance Rate</h2>
+		<img src="assets/images/emptyDonut.jpg" ng-show="graphdata.totals.acceptance_rate.accepted_orders=='0' || !graphdata.totals.acceptance_rate.accepted_orders || graphdata.totals.acceptance_rate.accepted_orders=='0' || !graphdata.totals.acceptance_rate.accepted_orders"/>
+		<div class = "pie-chart-totals" ng-show="graphdata.totals.acceptance_rate.accepted_orders/graphdata.totals.acceptance_rate.total_orders*100 !='0' && graphdata.totals.acceptance_rate.accepted_orders/graphdata.totals.acceptance_rate.total_orders*100">
+		{{graphdata.totals.acceptance_rate.accepted_orders/graphdata.totals.acceptance_rate.total_orders*100 | number:0}}%</div>
+		<nvd3 class="pie-chart" options="PieChartController.options" data="graphdata.acceptance_rate" ng-show="graphdata.totals.acceptance_rate.accepted_orders/graphdata.totals.acceptance_rate.total_orders*100 !='0' && graphdata.totals.acceptance_rate.accepted_orders/graphdata.totals.acceptance_rate.total_orders*100"></nvd3>
+	</div><div class = "pie" style = "top:2%;">
+		<h2>Lost Business</h2>
+		<img src="assets/images/emptyDonut.jpg" ng-show="(graphdata.totals.lost_business == '0' || !graphdata.totals.lost_business) && (graphdata.totals.orders == '0' || !graphdata.totals.orders)"/>
+		<img src="assets/images/noLoss.png" ng-show="(graphdata.totals.lost_business == '0' || !graphdata.totals.lost_business) && !(graphdata.totals.orders == '0' || !graphdata.totals.orders)"/>
+		<div class = "pie-chart-totals" ng-hide="PieChartController.shortenByIndianFormat(graphdata.totals.lost_business) == '0' || !graphdata.totals.lost_business">{{PieChartController.shortenByIndianFormat(graphdata.totals.lost_business)}}</div>
+		<nvd3 ng-hide="PieChartController.shortenByIndianFormat(graphdata.totals.lost_business) == '0' || !graphdata.totals.lost_business" class="pie-chart" options="PieChartController.options2" data="graphdata.lost_business"></nvd3>
+	</div>
+
+
+</div>

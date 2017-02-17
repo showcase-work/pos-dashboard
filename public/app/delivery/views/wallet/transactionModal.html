@@ -1,0 +1,84 @@
+<div class="transactionModal">
+	<div class="modal-header ">
+		<h3 class="modal-title">{{ transaction.walletDetails.identifier }}</h3>
+	</div>
+	<div class="modal-body ">
+		<uib-tabset active="active " >
+			<uib-tab index = "1" heading = "SUBSCRIPTIONS" >
+				<div class="subscriptions">
+					<h3 class="text-center">SUBSCRIPTIONS</h3>
+					<div class = "loader" ng-if="transaction.subscriptionsLoading">
+						<img class = "loader-img subscription-loader" ng-src = "/assets/images/loader2.gif"/>
+					</div>
+					<div class="no-data" ng-if="!transaction.subscriptionsLoading && !transaction.transactionError && transaction.subscriptions==''">
+						<h4> NO SUBSCRIPTIONS YET FOR {{ transaction.walletDetails.identifier }}
+						</h4>
+					</div>
+					<div class="error-message" ng-if="!transaction.subscriptionsLoading && transaction.transactionError && transaction.subscriptions!=''">
+						<h4> SOME ERROR OCCURED WHILE FETCHIING SUBSCRIPTIONS FOR  
+						{{ transaction.walletDetails.identifiier }}</h4>
+					</div>
+					<div ng-if="!subscriptionsLoading && !transaction.subscriptionError &&transaction.subscriptions!=''">
+						<table class="table">
+							<th>
+								PARTNER NAME
+							</th>
+							<th>
+								ADDRESS
+							</th>
+							<th>
+								CITY
+							</th>
+							<tr ng-repeat = "subscription in transaction.subscriptions">
+								<td>{{ subscription.m_service_name }}</td>
+								<td>{{ subscription.location_name }}</td>
+								<td>{{ subscription.city}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</uib-tab>
+			<uib-tab index="2" class="transactions"heading = "TRANSACTIONS" select="transaction.getWalletTransactions(transaction.walletDetails.id,transaction.page)">
+				<div class="transactions">
+					<h3 class="text-center" >TRANSACTIONS</h3>
+					<div class = "loader transaction-loader" ng-if="transaction.transactionsLoading">
+						<img class = "loader-img" ng-src = "/assets/images/loader2.gif"/>
+					</div>
+					
+					<div ng-if="!transaction.transactionsLoading && !transaction.transactionError && transaction.transactions==''">
+						<h4> NO TRANSACTIONS YET FOR {{ transaction.walletDetails.identifier }}
+						</h4>
+					</div>
+					<div ng-if="!transaction.transactionsLoading && transaction.transactions!=''">
+						<table class="table">
+							<th>ID</th>
+							<th>TYPE</th>
+							<th>CATERGORY</th>
+							<th>NAME</th>
+							<th>AMOUNT</th>
+							<th>DATE</th>
+							<th>LOCATION</th>
+							<th>CITY</th>
+							<tr ng-repeat = "transaction_data in transaction.transactions">
+								<td>{{ transaction_data.id }}</td>
+								<td>{{ transaction_data.type }}</td>
+								<td>{{ transaction_data.m_name }}</td>
+								<td>{{ transaction_data.m_service_name }}</td>
+								<td>{{ transaction_data.amount }}</td>
+								<td>{{ transaction_data.created_at | date : "short" }}</td>
+								<td>{{ transaction_data.location_name }}</td>
+								<td>{{ transaction_data.city }}</td>
+							</tr>
+						</table>	
+						<div class="text-center">
+							<uib-pagination  total-items="transaction.totalTransactions" ng-model="transaction.page" ng-change="transaction.pageChanged()" max-size="transaction.maxSize"></uib-pagination>
+						</div>
+					</div>
+				</div>
+			</uib-tab>
+		</uib-tabset>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" type="button" ng-click="transaction.closeModal()">Close</button>
+	</div>
+</div>

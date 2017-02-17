@@ -1,0 +1,187 @@
+
+<div class = "loader" ng-if="DashboardviewComponent.orders =='' "><img class = "loader-img" ng-src = "/assets/images/loader2.gif"/></div>
+<div ng-if="DashboardviewComponent.orders !='' " class = "main-content-view dashboard-content">
+	
+	<div class = "dashboard-card revenue">
+		<div class = "card-title">
+			REVENUE
+		</div>
+		<div class = "toggle-button">
+			<div class = "toggle-content" style = "margin-left:{{DashboardviewComponent.toggle.revenue.margin}}px" ng-click = "DashboardviewComponent.toggleButton('revenue')">
+				<div class = "toggle-text inline toggle-mode">
+					mode
+				</div>
+				<div class = "toggle-circle inline revenue">
+				</div>
+				<div class = "toggle-text inline toggle-source">
+					source
+				</div>
+			</div>
+		</div>
+		<div class = "card-content">
+				<div class = "dashboard-content-left">
+					<div class = "total-number-container">
+						<div class = "total-number">
+							&#8377; {{DashboardviewComponent.getShortIndianFormatForMoney(DashboardviewComponent.total_revenue)}}
+						</div>
+					</div>
+				</div><div class = "dashboard-content-right">
+					<div class = "stats-container" ng-if="DashboardviewComponent.toggle.revenue.selected == 'mode'">
+						<table class = "stats-table">
+							<tr class = "percentage-bar-row-container" ng-repeat = "source in DashboardviewComponent.orders_by_payment_mode | limitTo:4" ng-mouseover="DashboardviewComponent.showHoverBox(source, 'Revenue')" ng-mouseleave="DashboardviewComponent.hideHoverBox(source, 'Revenue')" ng-hide="source.revenue == '0' || !source.revenue">
+								<td >{{DashboardviewComponent.getPaymentMode(source.payment_mode)}}: </td>
+								<td class = "percentage-bar-row"><!--  {{source.revenue | number : 0}}  -->
+									<div class = "percentage-bar" style = "width:{{DashboardviewComponent.getWidth(DashboardviewComponent.orders_by_payment_mode[0].revenue, source.revenue)}}%">
+									</div>
+									<div ng-show="source.showHoverCardRevenue" class = "hover-box">
+										Rs {{source.revenue | number:0}}
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class = "stats-container" ng-if="DashboardviewComponent.toggle.revenue.selected == 'source'">
+						<table class = "stats-table">
+							<tr class = "percentage-bar-row-container" ng-repeat = "source in DashboardviewComponent.orders_by_sources | limitTo:4" ng-mouseover="DashboardviewComponent.showHoverBox(source, 'Revenue')" ng-mouseleave="DashboardviewComponent.hideHoverBox(source, 'Revenue')" ng-hide="source.revenue == '0' || !source.revenue">
+								<td>{{source['OrderSource.source_name']}}: </td>
+								<td class = "percentage-bar-row"> <!-- {{source.revenue | number : 0}} -->
+									<div class = "percentage-bar" style = "width:{{DashboardviewComponent.getWidth(DashboardviewComponent.orders_by_sources[0].revenue, source.revenue)}}%">
+									</div>
+									<div ng-show="source.showHoverCardRevenue" class = "hover-box">
+										Rs {{source.revenue | number:0}}
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+		</div>
+	</div><div class = "dashboard-card orders">
+			<div class = "card-title">
+				ORDERS
+			</div>
+			<div class = "toggle-button">
+				<div class = "toggle-content" style = "margin-left:{{DashboardviewComponent.toggle.orders.margin}}px" ng-click = "DashboardviewComponent.toggleButton('orders')">
+					<div class = "toggle-text inline toggle-mode">
+						mode
+					</div>
+					<div class = "toggle-circle inline orders">
+					</div>
+					<div class = "toggle-text inline toggle-source">
+						source
+					</div>
+				</div>
+			</div>
+			<div class = "card-content">
+					<div class = "dashboard-content-left">
+						<div class = "total-number-container">
+							<div class = "total-number">
+								{{DashboardviewComponent.total_orders | number:0}}
+							</div>
+						</div>
+					</div><div class = "dashboard-content-right">
+						<div class = "stats-container" ng-if="DashboardviewComponent.toggle.orders.selected == 'mode'">
+							<table class = "stats-table">
+								<tr class = "percentage-bar-row-container" ng-repeat = "source in DashboardviewComponent.orders_by_payment_mode | limitTo:4" ng-mouseover="DashboardviewComponent.showHoverBox(source, 'Orders')" ng-mouseleave="DashboardviewComponent.hideHoverBox(source, 'Orders')" ng-hide="source.orders_count == '0' || !source.orders_count">
+									<td>{{DashboardviewComponent.getPaymentMode(source.payment_mode)}}: </td>
+									<td class = "percentage-bar-row"> <!-- {{source.orders_count | number : 0}} -->
+										<div class = "percentage-bar" style = "width:{{DashboardviewComponent.getWidth(DashboardviewComponent.orders_by_payment_mode[0].orders_count, source.orders_count) }}%">
+										</div>
+										<div ng-show="source.showHoverCardOrders" class = "hover-box">
+											{{source.orders_count | number:0}}
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class = "stats-container" ng-if="DashboardviewComponent.toggle.orders.selected == 'source'">
+							<table class = "stats-table">
+								<tr class = "percentage-bar-row-container" ng-repeat = "source in DashboardviewComponent.orders_by_sources | limitTo:4" ng-mouseover="DashboardviewComponent.showHoverBox(source, 'Orders')" ng-mouseleave="DashboardviewComponent.hideHoverBox(source, 'Orders')" ng-hide="source.orders_count == '0' || !source.orders_count">
+									<td>{{source['OrderSource.source_name']}}: </td>
+									<td class = "percentage-bar-row"> <!-- {{source.orders_count | number : 0}} -->
+										<div class = "percentage-bar" style = "width:{{DashboardviewComponent.getWidth(DashboardviewComponent.orders_by_sources[0].orders_count, source.orders_count) }}%">
+										</div>	
+										<div ng-show="source.showHoverCardOrders" class = "hover-box">
+											{{source.orders_count | number:0}}
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div><!-- -------- -->
+			</div>
+		</div><div class = "dashboard-card averageBasketSize" style = "margin-right:0px;">
+			<div class = "card-title">
+				AVERAGE BASKET SIZE
+			</div>
+			<div class = "toggle-button">
+				<div class = "toggle-content" style = "margin-left:{{DashboardviewComponent.toggle.averageBasketSize.margin}}px" ng-click = "DashboardviewComponent.toggleButton('averageBasketSize')">
+					<div class = "toggle-text inline toggle-mode">
+						mode
+					</div>
+					<div class = "toggle-circle inline averageBasketSize">
+					</div>
+					<div class = "toggle-text inline toggle-source">
+						source
+					</div>
+				</div>
+			</div>
+			<div class = "card-content">
+					<div class = "dashboard-content-left">
+						<div class = "total-number-container">
+							<div class = "total-number">
+							&#8377; {{(DashboardviewComponent.total_revenue / DashboardviewComponent.total_orders | number: 0) || 0}}
+							</div>
+						</div>
+					</div><div class = "dashboard-content-right">
+						<div class = "stats-container" ng-if="DashboardviewComponent.toggle.averageBasketSize.selected == 'mode'">
+							<table class = "stats-table">
+								<tr class = "percentage-bar-row-container" ng-repeat = "source in DashboardviewComponent.orders_by_payment_mode | limitTo:4" ng-mouseover="DashboardviewComponent.showHoverBox(source, 'averageBasketSize')" ng-mouseleave="DashboardviewComponent.hideHoverBox(source, 'averageBasketSize')" ng-hide="source.orders_count == '0' || !source.orders_count || DashboardviewComponent.orders_by_payment_mode[$index].revenue == '0' || !DashboardviewComponent.orders_by_payment_mode[$index].revenue">
+									<td>{{DashboardviewComponent.getPaymentMode(source.payment_mode)}}: </td>
+									<td class = "percentage-bar-row"> <!-- {{source.orders_count | number : 0}} -->
+										<div class = "percentage-bar" style = "width:{{DashboardviewComponent.getWidth(DashboardviewComponent.orders_by_payment_mode[0].revenue/DashboardviewComponent.orders_by_payment_mode[0].orders_count, DashboardviewComponent.orders_by_payment_mode[$index].revenue/source.orders_count) }}%">
+										</div>
+										<div ng-show="source.showHoverCardaverageBasketSize" class = "hover-box">
+											{{DashboardviewComponent.orders_by_payment_mode[$index].revenue/source.orders_count | number:0}}
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class = "stats-container" ng-if="DashboardviewComponent.toggle.averageBasketSize.selected == 'source'">
+							<table class = "stats-table">
+								<tr class = "percentage-bar-row-container" ng-repeat = "source in DashboardviewComponent.orders_by_sources | limitTo:4" ng-mouseover="DashboardviewComponent.showHoverBox(source, 'averageBasketSize')" ng-mouseleave="DashboardviewComponent.hideHoverBox(source, 'averageBasketSize')" ng-hide="source.orders_count == '0' || !source.orders_count || DashboardviewComponent.orders_by_sources[$index].revenue == '0' || !DashboardviewComponent.orders_by_sources[$index].revenue">
+									<td>{{source['OrderSource.source_name']}}: </td>
+									<td class = "percentage-bar-row"> <!-- {{source.orders_count | number : 0}} -->
+										<div class = "percentage-bar" style = "width:{{DashboardviewComponent.getWidth(DashboardviewComponent.orders_by_sources[0].revenue/DashboardviewComponent.orders_by_sources[0].orders_count, DashboardviewComponent.orders_by_sources[$index].revenue/source.orders_count) }}%">
+										</div>	
+										<div ng-show="source.showHoverCardaverageBasketSize" class = "hover-box">
+											{{DashboardviewComponent.orders_by_sources[$index].revenue/source.orders_count | number:0}}
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div> <!-- end of lost card----- -->
+		</div>
+		<div class = "graph-section inline-block">
+			<div class="empty-graph-img" ng-show="DashboardviewComponent.graph.totalOrders == '0' || DashboardviewComponent.graph.totalRevenue == '0'">
+				<img ng-src="/assets/images/emptyGraph.png"/>
+			</div>
+			<div class = "graph" ng-hide="DashboardviewComponent.graph.totalOrders == '0' || DashboardviewComponent.graph.totalRevenue == '0'">
+				<div class = "graph-loader" ng-show = "DashboardviewComponent.updatingGraph">
+					<img ng-src = "/assets/images/loader2.gif" style = "max-width:20px; position:absolute; left:5px; top:5px;"/>
+				</div>
+				<select class = "form-control day-type-selector" ng-model = "DashboardviewComponent.date_selected" ng-change="DashboardviewComponent.changeDateType(DashboardviewComponent.date_selected)">
+				  <option ng-repeat = "option in DashboardviewComponent.date_type_list" value="{{option}}">{{option}}</option>
+				</select>
+				<graph graphdata="DashboardviewComponent.graph"></graph>
+			</div>
+		</div><div class = "pie-charts-section inline-block">
+			<piechart graphdata="DashboardviewComponent.pieChartGraph"></piechart>
+		</div>
+		
+</div>
+
+

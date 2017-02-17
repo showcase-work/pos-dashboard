@@ -1,0 +1,149 @@
+.date-location-container{
+	margin-bottom:10px;
+}
+
+.date-location-container .date-container{
+	display:inline-block;
+	width: 260px;
+	padding-left: 27px;
+	border: 1px solid #ebebeb;
+	box-shadow:none;
+}
+.date-location-container .fa-calendar{
+	position:absolute;
+	top: 1px;
+	left: 7px;
+}
+.date-location-container .dates{
+	position: relative;
+}
+
+.date-location-container .locations-filter-box{
+	position:absolute;
+	z-index:10000;
+	right:20px;
+}
+
+.date-location-container .locations-filters-dropdown .location-city-name{
+	display:inline-block;
+	vertical-align: middle;
+	padding:10px;
+	padding-left: 5px;
+	cursor: pointer;
+	max-width: 100px;
+	word-wrap: break-word;
+}
+
+.date-location-container .locations-filters-dropdown li{
+	width:100%;
+	border-bottom: 1px solid #ebebeb;
+	list-style:none;
+	position:relative;
+}
+
+.date-location-container .location-outlet{
+	cursor: pointer;
+	padding:5px;
+	padding-left: 15px;
+	color:#756F6F;
+	font-size:11px;
+}
+
+.date-location-container .locations-filters-main-container{
+	max-height:70vh;
+	overflow-y:scroll;
+}
+
+.date-location-container .locations-apply-button{
+	padding:5px;
+	text-align: center;
+	border-top:1px solid #ebebeb;
+}
+
+.date-location-container .apply-button{
+	background-color: #5cb85c;
+	padding:5px 7px;
+	border-radius: 5px;
+	color: white;
+}
+
+.date-location-container .locations-filters-dropdown i{
+	position:absolute;
+	right:2px;
+	margin:10px;
+	margin-top:13px;
+	margin-right: 14px;
+	cursor:pointer;
+	top:0px;
+}
+
+.date-location-container .locations-filters-dropdown .location-marker{
+	margin-right: 0px;
+	float: none;
+	display:inline-block;
+	vertical-align: top;
+	position:inherit;
+}
+
+
+.dates{
+	display:initial;
+}
+
+.date-location-container .date-container .form-control{
+	height:33px;
+	font-size: 11px;
+}
+
+.locations{
+	display: inline-block;
+	float:right;
+	position:relative;
+}
+
+.locations button:disabled{
+	color: grey;
+}
+
+.locations button{
+	display: inline-block;
+	padding: 6px 10px;
+	border: 1px solid #ebebeb;
+	margin-left:10px;
+	background-color: white;
+	outline:none;
+}
+
+.no-border-radius
+{
+	border-radius: 0%;
+}
+
+.locations .active{
+	background-color:#6ab2ed;
+	color: white;
+}
+
+.locations .semi-active{
+	color:#6ab2ed;
+}
+
+.dropdown-menu{
+	left:-30px;
+	padding:0px;
+}
+
+.refresh-btn{
+	background-color: white;
+	border: 1px solid #ebebeb;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+	cursor:pointer !important;
+	background-color: white;
+}
+
+.date-location-container .dropdown-menu{
+	min-width: 185px;
+	left:-60px;
+}

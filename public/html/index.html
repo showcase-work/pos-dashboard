@@ -1,0 +1,176 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <base href="/">
+    <title>Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <style>
+    html,body{
+      height:100%;
+    }
+    </style>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" />
+      <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+      <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css">
+      <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css">
+
+      <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css">
+
+      <link rel="stylesheet" href="app/app.css">
+      <link rel="stylesheet" href="app/dashboard/dashboard.css">
+      <link rel="stylesheet" href="app/dashboardview/dashboardview.css">
+      <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/orders/orders.css">
+      
+      <link rel="stylesheet" href="components/footer/footer.css">
+      <link rel="stylesheet" href="components/navbar/navbar.css">
+      <link rel="stylesheet" href="components/date-location-bar/date-location-bar.css">
+      <link rel="stylesheet" href="components/graph/graph.css">
+      <link rel="stylesheet" href="components/pie-chart/pie-chart.css">
+      <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
+       
+       <!-- css files for delivery dashboard  -->
+      <link rel="stylesheet" href="app/delivery/css/graph/home.css">
+      <link rel="stylesheet" href="app/delivery/css/graph/graph.css">
+      <link rel="stylesheet" href="app/delivery/css/main.css">
+      <link rel="stylesheet" href="app/delivery/css/order/order.css">
+      <link rel="stylesheet" href="app/delivery/css/wallet/wallet.css">
+      <link rel="stylesheet" href="app/delivery/css/wallet/transactionModal.css">
+
+      <!-- end delivery dasboard css file injection -->
+      <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp,client}) app/app.css -->
+      <!-- injector:css -->
+      <!-- endinjector -->
+    <!-- endbuild -->
+      <!-- <link rel="stylesheet" href="/assets/css/main.css" /> -->
+      <link rel="stylesheet" href="/app/app.css" />
+    
+  </head>
+  <body ng-app="dashboardApp">
+    <!--[if lt IE 7]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <toast></toast>
+    <!-- Add your site or application content here -->
+    <div ui-view="" style="height:100vh;"></div>
+    
+    
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+      /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-XXXXX-X');
+      ga('send', 'pageview');*/
+    </script>
+    <script src="bower_components/d3/d3.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- build:js({client,node_modules}) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="bower_components/momentjs/moment.js"></script>
+      <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+      <script src="bower_components/ng-bs-daterangepicker/src/ng-bs-daterangepicker.js"></script>
+      <script src="bower_components/ngToast/dist/ngToast.js"></script>
+      <script src="bower_components/ng-csv/build/ng-csv.js"></script>
+
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+
+       
+      <script src="bower_components/angularjs-slider/dist/rzslider.min.js"></script>
+      <!-- endbower -->
+
+      <script src="assets/js/d3.js" charset="utf-8"></script>
+      <script src="assets/js/nv.d3.js"></script>
+      <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script> 
+
+      
+    <!-- endbuild -->
+    <!-- build:js(.tmp) app/app.js -->
+      <script src="app/app.js"></script>
+      <!-- injector:js -->
+      <script src="components/auth/auth.module.js"></script>
+      <script src="app/dashboard/dashboard.js"></script>
+      <script src="app/dashboardview/dashboardview.controller.js"></script>
+      <script src="app/dashboardview/dashboardview.js"></script>
+      <script src="app/main/main.controller.js"></script>
+      <script src="app/main/main.js"></script>
+      <script src="components/graph-piechart-data/graph-piechart-data.js"></script>
+      <script src="app/orders/orders.controller.js"></script>
+      <script src="app/orders/orders.js"></script>
+      <script src="app/account/account.js"></script>
+      <script src="components/auth/auth.service.js"></script>
+      <script src="components/auth/interceptor.service.js"></script>
+
+      <script src="components/date-location-bar/date-location-bar.controller.js"></script>
+      <script src="components/date-location-bar/date-location-bar.directive.js"></script>
+      <script src="components/date-location-service/date-location-service.service.js"></script>
+      <script src="components/orders/orders.service.js"></script>
+      
+      <script src="components/footer/footer.directive.js"></script>
+      <script src="components/graph/graph.controller.js"></script>
+      <script src="components/graph/graph.directive.js"></script>
+      <script src="components/navbar/navbar.controller.js"></script>
+      <script src="components/navbar/navbar.directive.js"></script>
+      <script src="components/pie-chart/pie-chart.controller.js"></script>
+      <script src="components/pie-chart/pie-chart.directive.js"></script>
+
+
+      <!-- js files for delivery dashboard  -->
+      <!-- controllers -->
+      <script src="app/delivery/js/controllers/graph/homeController.js"></script>
+      <script src="app/delivery/js/controllers/order/orderController.js"></script> 
+      <script src="app/delivery/js/controllers/graph/graphController.js"></script>
+      <script src="app/delivery/js/controllers/wallet/walletController.js"></script>
+      <script src="app/delivery/js/controllers/wallet/transactionController.js"></script>
+      <script src="app/delivery/js/controllers/order/raiseIssueController.js"></script>
+      <script src="components/delivery/pie-chart/deliveryPieChartController.js"></script>
+      <script src="components/delivery/line-chart/deliveryLineChartController.js"></script>
+      <script src="components/delivery/bar-graph/deliveryBarGraphController.js"></script>
+      
+      <!-- services -->
+      <script src="components/delivery/wallet/walletService.js"></script>
+      <script src="components/delivery/graph/graphService.js"></script>
+      <script src="components/delivery/graph/homeService.js"></script>
+      <script src="components/delivery/order/orderService.js"></script>
+
+      <!-- directives -->
+      <script src="components/delivery/pie-chart/deliveryPieChartDirective.js"></script>
+      <script src="components/delivery/line-chart/deliveryLineChartDirective.js"></script>
+      <script src="components/delivery/bar-graph/deliveryBarGraphDirective.js"></script>
+
+      <!-- routes -->
+      <script src="app/delivery/js/routes.js"></script>
+      <!-- deliver dashboard js files end -->
+      <!-- endinjector -->
+    <!-- endbuild -->
+  </body>
+</html>
