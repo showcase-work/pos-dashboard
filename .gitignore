@@ -5,5 +5,4 @@ node_modules/
 *.log
 public/apidoc
 public/bower_components
-config/
 .env
