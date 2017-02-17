@@ -20,7 +20,7 @@ consign()
     .then("./middlewares/errorHandler.js")
     .into(app);
 
-let appPort = process.env.APP_PORT || "8080";
+let appPort = process.env.PORT || "8080";
 
 if (process.env.NODE_ENV !== "test") {
     app.listen(appPort, () => {
