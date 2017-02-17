@@ -6,7 +6,8 @@
     "start": "node app",
     "test": "./node_modules/.bin/mocha ./test/**/*.js",
     "eslint": "./node_modules/.bin/eslint .",
-    "apidoc": "apidoc -i controllers/ -o public/apidoc"
+    "apidoc": "apidoc -i controllers/ -o public/apidoc",
+    "postinstall": "bower install"
   },
   "apidoc": {
     "name": "pos dashboard apis Documentation",
